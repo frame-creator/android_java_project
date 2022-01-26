@@ -39,11 +39,6 @@ public class ResultActivity extends AppCompatActivity {
 
 
 
-        getSupportActionBar().setElevation(0);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"white\"></font>"));
-        getSupportActionBar().setTitle("Result");
-        ColorDrawable colorDrawable=new ColorDrawable(Color.parseColor("#1E1D1D"));
-        getSupportActionBar().setBackgroundDrawable(colorDrawable);
 
 
 
@@ -69,44 +64,21 @@ public class ResultActivity extends AppCompatActivity {
 
         mbmi=Float.toString(intbmi);
 
-        if(intbmi<16)
-        {
-            mbmicategory.setText("극심한 저체중");
-            mbackground.setBackgroundColor(Color.RED);
-            mimageview.setImageResource(R.drawable.crosss);
-        }
-        else if(intbmi<16.9 && intbmi>16)
-        {
-            mbmicategory.setText("중간 저체중");
-            mbackground.setBackgroundColor(Color.RED);
-            mimageview.setImageResource(R.drawable.warning);
-        }
-        else if(intbmi<18.4 && intbmi>17)
-        {
-            mbmicategory.setText("저체중");
-            mbackground.setBackgroundColor(Color.RED);
-            mimageview.setImageResource(R.drawable.warning);
-        }
-        else if(intbmi<25 && intbmi>18.4)
-        {
-            mbmicategory.setText("정상체중");
-            mbackground.setBackgroundColor(Color.YELLOW);
-            mimageview.setImageResource(R.drawable.ok);
-        }
-        else if(intbmi<29.4 && intbmi>25)
-        {
-            mbmicategory.setText("과체중");
-            mbackground.setBackgroundColor(Color.RED);
-            mimageview.setImageResource(R.drawable.warning);
-        }
-        else
-        {
-            mbmicategory.setText("고도 비만");
-            mbackground.setBackgroundColor(Color.RED);
-            mimageview.setImageResource(R.drawable.warning);
-        }
+        TextView category = findViewById(R.id.category);
+        Category category1 = new Category();
+        category.setText(category1.getCategory(BMI));
 
+        TextView condition = findViewById(R.id.condition);
+        Condition condition1 = new Condition();
+        condition.setText(condition1.getCategory(BMI));
 
+        TextView risk = findViewById(R.id.risk);
+        RiskCalculate risk1 = new RiskCalculate();
+        risk.setText(risk1.getResult(BMI, intwaist,gender_value));
+
+        TextView riskcategory = findViewById(R.id.riskcategory);
+        RiskTextCalculate riskcategory1 = new RiskTextCalculate();
+        riskcategory.setText(riskcategory1.getResult(BMI, intwaist,gender_value));
 
         mgender.setText(intent.getStringExtra("gender"));
         mbmidisplay.setText(mbmi);
